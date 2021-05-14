@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function myfunction()
+        {
+            var set1 = document.getElementById('val').value;
+            
+            var formData={
+            	set1:set1
+                };
+                console.log(formData);
+                $.ajax({
+                type: "GET",
+                url: 'http://localhost:5000/fast',
+                dataType:"json",
+                contentType: 'application/json',
+                processData:true,
+                data:formData,
+                success:function(response){
+                	console.log('successs');
+                	var result=response;
+                    $('#result').html(response);
+                    
+                    document.getElementById("result").innerHTML = result.content;
+        	        console.log(result.sin);
+                 },
+                error:function(result) {
+                       console.log(result);
+                 }
+                
+              });
+            
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form>
+          <h1 class="text-center">fast-com</h1>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="">Text</label>
+                <input type="text" class="form-control" id="val" required name="email" >
+              </div>
+              <div class="col mt-4 pt-2">
+                <button type="button" class="btn btn-primary btn-block" onclick = "myfunction()">Calculate</button>
+              </div>
+            </div>
+            <h1>Result</h1>
+            <pre id="result" class="mt-2" style="font-size: 20px;">
+
+            </pre>
+        </form>
+    </div> 
+</body>
+</html>
